@@ -45,3 +45,12 @@ buf lint --config buf.yaml
 ```
 make lint-proto
 ```
+
+команда позволяет обнаруживать критические изменения в протофайлах
+```
+buf breaking --against 'https://github.com/DmitriiPro/go-grpc-buf-project.git#branch=main'
+```
+или 
+```
+make lint-breaking
+```
