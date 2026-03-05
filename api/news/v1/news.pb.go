@@ -7,6 +7,7 @@
 package newsv1
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -22,27 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type NewID struct {
+type NewsServiceGetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *NewID) Reset() {
-	*x = NewID{}
+func (x *NewsServiceGetRequest) Reset() {
+	*x = NewsServiceGetRequest{}
 	mi := &file_news_v1_news_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *NewID) String() string {
+func (x *NewsServiceGetRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NewID) ProtoMessage() {}
+func (*NewsServiceGetRequest) ProtoMessage() {}
 
-func (x *NewID) ProtoReflect() protoreflect.Message {
+func (x *NewsServiceGetRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_news_v1_news_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,111 +55,19 @@ func (x *NewID) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NewID.ProtoReflect.Descriptor instead.
-func (*NewID) Descriptor() ([]byte, []int) {
+// Deprecated: Use NewsServiceGetRequest.ProtoReflect.Descriptor instead.
+func (*NewsServiceGetRequest) Descriptor() ([]byte, []int) {
 	return file_news_v1_news_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *NewID) GetId() string {
+func (x *NewsServiceGetRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-type NewRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Author        string                 `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
-	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	Summary       string                 `protobuf:"bytes,4,opt,name=summary,proto3" json:"summary,omitempty"`
-	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-	Source        string                 `protobuf:"bytes,6,opt,name=source,proto3" json:"source,omitempty"`
-	Tags          []string               `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *NewRequest) Reset() {
-	*x = NewRequest{}
-	mi := &file_news_v1_news_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *NewRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*NewRequest) ProtoMessage() {}
-
-func (x *NewRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_news_v1_news_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use NewRequest.ProtoReflect.Descriptor instead.
-func (*NewRequest) Descriptor() ([]byte, []int) {
-	return file_news_v1_news_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *NewRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *NewRequest) GetAuthor() string {
-	if x != nil {
-		return x.Author
-	}
-	return ""
-}
-
-func (x *NewRequest) GetTitle() string {
-	if x != nil {
-		return x.Title
-	}
-	return ""
-}
-
-func (x *NewRequest) GetSummary() string {
-	if x != nil {
-		return x.Summary
-	}
-	return ""
-}
-
-func (x *NewRequest) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-func (x *NewRequest) GetSource() string {
-	if x != nil {
-		return x.Source
-	}
-	return ""
-}
-
-func (x *NewRequest) GetTags() []string {
-	if x != nil {
-		return x.Tags
-	}
-	return nil
-}
-
-type NewsResponse struct {
+type NewsServiceGetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Author        string                 `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
@@ -174,20 +83,133 @@ type NewsResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *NewsResponse) Reset() {
-	*x = NewsResponse{}
+func (x *NewsServiceGetResponse) Reset() {
+	*x = NewsServiceGetResponse{}
+	mi := &file_news_v1_news_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewsServiceGetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewsServiceGetResponse) ProtoMessage() {}
+
+func (x *NewsServiceGetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_news_v1_news_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewsServiceGetResponse.ProtoReflect.Descriptor instead.
+func (*NewsServiceGetResponse) Descriptor() ([]byte, []int) {
+	return file_news_v1_news_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *NewsServiceGetResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *NewsServiceGetResponse) GetAuthor() string {
+	if x != nil {
+		return x.Author
+	}
+	return ""
+}
+
+func (x *NewsServiceGetResponse) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *NewsServiceGetResponse) GetSummary() string {
+	if x != nil {
+		return x.Summary
+	}
+	return ""
+}
+
+func (x *NewsServiceGetResponse) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *NewsServiceGetResponse) GetSource() string {
+	if x != nil {
+		return x.Source
+	}
+	return ""
+}
+
+func (x *NewsServiceGetResponse) GetTags() []string {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
+func (x *NewsServiceGetResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *NewsServiceGetResponse) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *NewsServiceGetResponse) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
+}
+
+type NewsServiceCreateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Author        string                 `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Summary       string                 `protobuf:"bytes,4,opt,name=summary,proto3" json:"summary,omitempty"`
+	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+	Source        string                 `protobuf:"bytes,6,opt,name=source,proto3" json:"source,omitempty"`
+	Tags          []string               `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewsServiceCreateRequest) Reset() {
+	*x = NewsServiceCreateRequest{}
 	mi := &file_news_v1_news_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *NewsResponse) String() string {
+func (x *NewsServiceCreateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NewsResponse) ProtoMessage() {}
+func (*NewsServiceCreateRequest) ProtoMessage() {}
 
-func (x *NewsResponse) ProtoReflect() protoreflect.Message {
+func (x *NewsServiceCreateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_news_v1_news_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -199,75 +221,170 @@ func (x *NewsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NewsResponse.ProtoReflect.Descriptor instead.
-func (*NewsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use NewsServiceCreateRequest.ProtoReflect.Descriptor instead.
+func (*NewsServiceCreateRequest) Descriptor() ([]byte, []int) {
 	return file_news_v1_news_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *NewsResponse) GetId() string {
+func (x *NewsServiceCreateRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *NewsResponse) GetAuthor() string {
+func (x *NewsServiceCreateRequest) GetAuthor() string {
 	if x != nil {
 		return x.Author
 	}
 	return ""
 }
 
-func (x *NewsResponse) GetTitle() string {
+func (x *NewsServiceCreateRequest) GetTitle() string {
 	if x != nil {
 		return x.Title
 	}
 	return ""
 }
 
-func (x *NewsResponse) GetSummary() string {
+func (x *NewsServiceCreateRequest) GetSummary() string {
 	if x != nil {
 		return x.Summary
 	}
 	return ""
 }
 
-func (x *NewsResponse) GetContent() string {
+func (x *NewsServiceCreateRequest) GetContent() string {
 	if x != nil {
 		return x.Content
 	}
 	return ""
 }
 
-func (x *NewsResponse) GetSource() string {
+func (x *NewsServiceCreateRequest) GetSource() string {
 	if x != nil {
 		return x.Source
 	}
 	return ""
 }
 
-func (x *NewsResponse) GetTags() []string {
+func (x *NewsServiceCreateRequest) GetTags() []string {
 	if x != nil {
 		return x.Tags
 	}
 	return nil
 }
 
-func (x *NewsResponse) GetCreatedAt() *timestamppb.Timestamp {
+type NewsServiceCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Author        string                 `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Summary       string                 `protobuf:"bytes,4,opt,name=summary,proto3" json:"summary,omitempty"`
+	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+	Source        string                 `protobuf:"bytes,6,opt,name=source,proto3" json:"source,omitempty"`
+	Tags          []string               `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewsServiceCreateResponse) Reset() {
+	*x = NewsServiceCreateResponse{}
+	mi := &file_news_v1_news_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewsServiceCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewsServiceCreateResponse) ProtoMessage() {}
+
+func (x *NewsServiceCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_news_v1_news_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewsServiceCreateResponse.ProtoReflect.Descriptor instead.
+func (*NewsServiceCreateResponse) Descriptor() ([]byte, []int) {
+	return file_news_v1_news_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *NewsServiceCreateResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *NewsServiceCreateResponse) GetAuthor() string {
+	if x != nil {
+		return x.Author
+	}
+	return ""
+}
+
+func (x *NewsServiceCreateResponse) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *NewsServiceCreateResponse) GetSummary() string {
+	if x != nil {
+		return x.Summary
+	}
+	return ""
+}
+
+func (x *NewsServiceCreateResponse) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *NewsServiceCreateResponse) GetSource() string {
+	if x != nil {
+		return x.Source
+	}
+	return ""
+}
+
+func (x *NewsServiceCreateResponse) GetTags() []string {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
+func (x *NewsServiceCreateResponse) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return nil
 }
 
-func (x *NewsResponse) GetUpdatedAt() *timestamppb.Timestamp {
+func (x *NewsServiceCreateResponse) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UpdatedAt
 	}
 	return nil
 }
 
-func (x *NewsResponse) GetDeletedAt() *timestamppb.Timestamp {
+func (x *NewsServiceCreateResponse) GetDeletedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.DeletedAt
 	}
@@ -278,19 +395,33 @@ var File_news_v1_news_proto protoreflect.FileDescriptor
 
 const file_news_v1_news_proto_rawDesc = "" +
 	"\n" +
-	"\x12news/v1/news.proto\x12\anews.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x17\n" +
-	"\x05NewID\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\xaa\x01\n" +
-	"\n" +
-	"NewRequest\x12\x0e\n" +
+	"\x12news/v1/news.proto\x12\anews.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bbuf/validate/validate.proto\"1\n" +
+	"\x15NewsServiceGetRequest\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\"\xe7\x02\n" +
+	"\x16NewsServiceGetResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06author\x18\x02 \x01(\tR\x06author\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12\x18\n" +
 	"\asummary\x18\x04 \x01(\tR\asummary\x12\x18\n" +
 	"\acontent\x18\x05 \x01(\tR\acontent\x12\x16\n" +
 	"\x06source\x18\x06 \x01(\tR\x06source\x12\x12\n" +
-	"\x04tags\x18\a \x03(\tR\x04tags\"\xdd\x02\n" +
-	"\fNewsResponse\x12\x0e\n" +
+	"\x04tags\x18\a \x03(\tR\x04tags\x129\n" +
+	"\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
+	"\n" +
+	"deleted_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\xef\x01\n" +
+	"\x18NewsServiceCreateRequest\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12\x1f\n" +
+	"\x06author\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x02R\x06author\x12\x1d\n" +
+	"\x05title\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x02R\x05title\x12!\n" +
+	"\asummary\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x06R\asummary\x12!\n" +
+	"\acontent\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x06R\acontent\x12\x1f\n" +
+	"\x06source\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x02R\x06source\x12\x12\n" +
+	"\x04tags\x18\a \x03(\tR\x04tags\"\xea\x02\n" +
+	"\x19NewsServiceCreateResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06author\x18\x02 \x01(\tR\x06author\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12\x18\n" +
@@ -319,22 +450,26 @@ func file_news_v1_news_proto_rawDescGZIP() []byte {
 	return file_news_v1_news_proto_rawDescData
 }
 
-var file_news_v1_news_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_news_v1_news_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_news_v1_news_proto_goTypes = []any{
-	(*NewID)(nil),                 // 0: news.v1.NewID
-	(*NewRequest)(nil),            // 1: news.v1.NewRequest
-	(*NewsResponse)(nil),          // 2: news.v1.NewsResponse
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*NewsServiceGetRequest)(nil),     // 0: news.v1.NewsServiceGetRequest
+	(*NewsServiceGetResponse)(nil),    // 1: news.v1.NewsServiceGetResponse
+	(*NewsServiceCreateRequest)(nil),  // 2: news.v1.NewsServiceCreateRequest
+	(*NewsServiceCreateResponse)(nil), // 3: news.v1.NewsServiceCreateResponse
+	(*timestamppb.Timestamp)(nil),     // 4: google.protobuf.Timestamp
 }
 var file_news_v1_news_proto_depIdxs = []int32{
-	3, // 0: news.v1.NewsResponse.created_at:type_name -> google.protobuf.Timestamp
-	3, // 1: news.v1.NewsResponse.updated_at:type_name -> google.protobuf.Timestamp
-	3, // 2: news.v1.NewsResponse.deleted_at:type_name -> google.protobuf.Timestamp
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 0: news.v1.NewsServiceGetResponse.created_at:type_name -> google.protobuf.Timestamp
+	4, // 1: news.v1.NewsServiceGetResponse.updated_at:type_name -> google.protobuf.Timestamp
+	4, // 2: news.v1.NewsServiceGetResponse.deleted_at:type_name -> google.protobuf.Timestamp
+	4, // 3: news.v1.NewsServiceCreateResponse.created_at:type_name -> google.protobuf.Timestamp
+	4, // 4: news.v1.NewsServiceCreateResponse.updated_at:type_name -> google.protobuf.Timestamp
+	4, // 5: news.v1.NewsServiceCreateResponse.deleted_at:type_name -> google.protobuf.Timestamp
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_news_v1_news_proto_init() }
@@ -348,7 +483,7 @@ func file_news_v1_news_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_news_v1_news_proto_rawDesc), len(file_news_v1_news_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

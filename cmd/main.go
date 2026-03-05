@@ -20,9 +20,14 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	var opts []grpc.ServerOption
+	
+	newsServer, err := grpc_server.NewServer()
+	if err != nil {
+		log.Fatalf("failed to create news server: %v", err)
+	}
 
 	grpcServer := grpc.NewServer(opts...)
-	newsv1.RegisterNewsServiceServer(grpcServer, grpc_server.NewServer())
+	newsv1.RegisterNewsServiceServer(grpcServer, newsServer)
 
 	healthServer := health.NewServer()
 	healthv1.RegisterHealthServer(grpcServer, healthServer)

@@ -1,12 +1,13 @@
 syntax = "proto3";
 package news.v1;
 
-option go_package = "news/buf/grpc/api/news/v1;newsv1";
+
 
 import "google/protobuf/timestamp.proto";
+import "buf/validate/validate.proto";
 
 message NewsServiceGetRequest {
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.uuid = true];
 }
 
 message NewsServiceGetResponse {
@@ -23,12 +24,12 @@ message NewsServiceGetResponse {
 }
 
 message NewsServiceCreateRequest {
-  string id = 1;
-  string author = 2;
-  string title = 3;
-  string summary = 4;
-  string content = 5;
-  string source = 6;
+  string id = 1 [(buf.validate.field).string.uuid = true];
+  string author = 2 [(buf.validate.field).string.min_len = 2];
+  string title = 3 [(buf.validate.field).string.min_len = 2];
+  string summary = 4 [(buf.validate.field).string.min_len = 6];
+  string content = 5 [(buf.validate.field).string.min_len = 6];
+  string source = 6 [(buf.validate.field).string.min_len = 2];
   repeated string tags = 7;
 }
 

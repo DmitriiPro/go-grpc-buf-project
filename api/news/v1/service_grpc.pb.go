@@ -27,8 +27,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NewsServiceClient interface {
-	Create(ctx context.Context, in *NewRequest, opts ...grpc.CallOption) (*NewsResponse, error)
-	Get(ctx context.Context, in *NewID, opts ...grpc.CallOption) (*NewsResponse, error)
+	Create(ctx context.Context, in *NewsServiceCreateRequest, opts ...grpc.CallOption) (*NewsServiceCreateResponse, error)
+	Get(ctx context.Context, in *NewsServiceGetRequest, opts ...grpc.CallOption) (*NewsServiceGetResponse, error)
 }
 
 type newsServiceClient struct {
@@ -39,9 +39,9 @@ func NewNewsServiceClient(cc grpc.ClientConnInterface) NewsServiceClient {
 	return &newsServiceClient{cc}
 }
 
-func (c *newsServiceClient) Create(ctx context.Context, in *NewRequest, opts ...grpc.CallOption) (*NewsResponse, error) {
+func (c *newsServiceClient) Create(ctx context.Context, in *NewsServiceCreateRequest, opts ...grpc.CallOption) (*NewsServiceCreateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NewsResponse)
+	out := new(NewsServiceCreateResponse)
 	err := c.cc.Invoke(ctx, NewsService_Create_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -49,9 +49,9 @@ func (c *newsServiceClient) Create(ctx context.Context, in *NewRequest, opts ...
 	return out, nil
 }
 
-func (c *newsServiceClient) Get(ctx context.Context, in *NewID, opts ...grpc.CallOption) (*NewsResponse, error) {
+func (c *newsServiceClient) Get(ctx context.Context, in *NewsServiceGetRequest, opts ...grpc.CallOption) (*NewsServiceGetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NewsResponse)
+	out := new(NewsServiceGetResponse)
 	err := c.cc.Invoke(ctx, NewsService_Get_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -63,8 +63,8 @@ func (c *newsServiceClient) Get(ctx context.Context, in *NewID, opts ...grpc.Cal
 // All implementations must embed UnimplementedNewsServiceServer
 // for forward compatibility.
 type NewsServiceServer interface {
-	Create(context.Context, *NewRequest) (*NewsResponse, error)
-	Get(context.Context, *NewID) (*NewsResponse, error)
+	Create(context.Context, *NewsServiceCreateRequest) (*NewsServiceCreateResponse, error)
+	Get(context.Context, *NewsServiceGetRequest) (*NewsServiceGetResponse, error)
 	mustEmbedUnimplementedNewsServiceServer()
 }
 
@@ -75,10 +75,10 @@ type NewsServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedNewsServiceServer struct{}
 
-func (UnimplementedNewsServiceServer) Create(context.Context, *NewRequest) (*NewsResponse, error) {
+func (UnimplementedNewsServiceServer) Create(context.Context, *NewsServiceCreateRequest) (*NewsServiceCreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedNewsServiceServer) Get(context.Context, *NewID) (*NewsResponse, error) {
+func (UnimplementedNewsServiceServer) Get(context.Context, *NewsServiceGetRequest) (*NewsServiceGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedNewsServiceServer) mustEmbedUnimplementedNewsServiceServer() {}
@@ -103,7 +103,7 @@ func RegisterNewsServiceServer(s grpc.ServiceRegistrar, srv NewsServiceServer) {
 }
 
 func _NewsService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewRequest)
+	in := new(NewsServiceCreateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -115,13 +115,13 @@ func _NewsService_Create_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: NewsService_Create_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServiceServer).Create(ctx, req.(*NewRequest))
+		return srv.(NewsServiceServer).Create(ctx, req.(*NewsServiceCreateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _NewsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewID)
+	in := new(NewsServiceGetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ func _NewsService_Get_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: NewsService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NewsServiceServer).Get(ctx, req.(*NewID))
+		return srv.(NewsServiceServer).Get(ctx, req.(*NewsServiceGetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
