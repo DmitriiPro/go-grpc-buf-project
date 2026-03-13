@@ -2,6 +2,7 @@ package memstore
 
 import (
 	"fmt"
+	"log"
 	newsv1 "news/buf/grpc/api/news/v1"
 	"sync"
 )
@@ -9,6 +10,7 @@ import (
 type MemStore interface {
 	Create(news *newsv1.NewsServiceCreateResponse)
 	Get(id string) (*newsv1.NewsServiceCreateResponse, error)
+	GetAll() []*newsv1.NewsServiceCreateResponse
 }
 
 type Store struct {
@@ -22,9 +24,25 @@ func NewStore() *Store {
 	}
 }
 
+func (s *Store) GetAll() []*newsv1.NewsServiceCreateResponse {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	result := make([]*newsv1.NewsServiceCreateResponse, 0, len(s.news))
+
+	for _, news := range s.news {
+		if news.DeletedAt == nil || news.DeletedAt.AsTime().IsZero(){
+			result = append(result, news)
+		}
+	}
+
+	return result
+}
+
 func (s *Store) Create(news *newsv1.NewsServiceCreateResponse) {
 	s.mu.Lock()
 	s.news[news.GetId()] = news
+	log.Println("create news:", news.Id)
 	s.mu.Unlock()
 }
 

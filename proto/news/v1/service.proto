@@ -4,9 +4,11 @@ package news.v1;
 
 
 import "news/v1/news.proto";
+import "google/protobuf/empty.proto";
 
 
 service NewsService {
   rpc Create (NewsServiceCreateRequest) returns (NewsServiceCreateResponse);
   rpc Get (NewsServiceGetRequest) returns (NewsServiceGetResponse);
+  rpc GetAll(google.protobuf.Empty) returns (stream NewsServiceGetResponse);
 }
