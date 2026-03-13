@@ -3,6 +3,8 @@ package grpc_server
 import (
 	"context"
 	"errors"
+	"fmt"
+	"io"
 	"log"
 	newsv1 "news/buf/grpc/api/news/v1"
 	"news/buf/grpc/internal/memstore"
@@ -41,6 +43,28 @@ func (s *Server) Validator(req interface{}) error {
 	}
 
 	return errors.New("invalid request")
+}
+
+func (s *Server) UpdateNews(stream newsv1.NewsService_UpdateNewsServer) error {
+	for {
+		req, err := stream.Recv()
+		if err == io.EOF {
+			return stream.SendAndClose(&emptypb.Empty{})
+		}
+		if err != nil {
+			return err
+		}
+
+		if err := s.Validator(req); err != nil {
+			log.Printf("Validation failed for UpdateNews request: %v", err)
+			return status.Errorf(codes.InvalidArgument, "validation failed: %v", err)
+		}
+
+		fmt.Printf("update news: %v", req)
+		s.store.UpdateNews(req)
+
+	}
+
 }
 
 func (s *Server) GetAll(in *emptypb.Empty, stream newsv1.NewsService_GetAllServer) error {

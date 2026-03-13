@@ -97,6 +97,58 @@ func main() {
 		allNews = append(allNews, feature)
 
 	}
-	log.Printf("allNews: %v", allNews)
+	// log.Printf("allNews: %v", allNews)
 
+	//* Client-side streaming RPC
+	var streamUpdateNews grpc.ClientStreamingClient[newsv1.NewsServiceCreateRequest, emptypb.Empty]
+	
+	streamUpdateNews, err = client.UpdateNews(ctx)
+	if err != nil {
+		log.Fatalf("failed to update news: %v", err)
+	}
+
+
+	for i := 0; i < 5; i++ {
+		if err := streamUpdateNews.Send(
+			&newsv1.NewsServiceCreateRequest{
+				Id:      uuid.New().String(),
+				Title:   fmt.Sprintf("Breaking News %d", i),
+				Content: fmt.Sprintf("This is the content of the breaking news. %d", i),
+				Author:  fmt.Sprintf("John Doe %d", i),
+				Summary: fmt.Sprintf("This is a summary of the breaking news. %d", i),
+				Source:  fmt.Sprintf("News Agency %d", i),
+				Tags:    []string{"breaking", "news", "world"},
+			},
+		); err != nil {
+			log.Fatalf("failed to send news: %v", err)
+		}
+	}
+
+	if err := streamUpdateNews.CloseSend(); err != nil {
+		log.Fatalf("failed to close send: %v", err)
+	}
+
+
+		streamGetAll, err = client.GetAll(ctx, &emptypb.Empty{})
+	if err != nil {
+		log.Fatalf("failed to streaming get all news: %v", err)
+	}
+
+	// allNews := make([]*newsv1.NewsServiceGetResponse, 0)
+
+	for {
+		feature, err := streamGetAll.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("%v.GetAll = _, %v", client, err)
+		}
+		log.Printf("feature: %v\n", feature)
+
+		allNews = append(allNews, feature)
+
+	}
+
+	log.Printf("allNews: %v", allNews)
 }
