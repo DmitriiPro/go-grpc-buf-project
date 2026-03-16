@@ -16,4 +16,7 @@ service NewsService {
 
   // Client side stream
   rpc UpdateNews (stream NewsServiceCreateRequest) returns (google.protobuf.Empty);
+
+  // Bidirectional stream 
+  rpc DeleteNews(stream NewsID) returns (stream NewsIdResponse);
 }

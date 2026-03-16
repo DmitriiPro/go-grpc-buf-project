@@ -6,6 +6,7 @@ import (
 	newsv1 "news/buf/grpc/api/news/v1"
 	"sync"
 
+	"github.com/google/uuid"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -14,6 +15,7 @@ type MemStore interface {
 	Get(id string) (*newsv1.NewsServiceCreateResponse, error)
 	GetAll() []*newsv1.NewsServiceCreateResponse
 	UpdateNews(*newsv1.NewsServiceCreateRequest)
+	DeleteNews(id uuid.UUID)
 }
 
 type Store struct {
@@ -24,6 +26,17 @@ type Store struct {
 func NewStore() *Store {
 	return &Store{
 		news: make(map[string]*newsv1.NewsServiceCreateResponse),
+	}
+}
+
+func (s *Store) DeleteNews(id uuid.UUID) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	for idx, news := range s.news {
+		if news.Id == id.String() {
+			s.news[idx].DeletedAt = timestamppb.Now()
+			return
+		}
 	}
 }
 

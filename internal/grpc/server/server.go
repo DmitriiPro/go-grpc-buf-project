@@ -10,6 +10,7 @@ import (
 	"news/buf/grpc/internal/memstore"
 
 	"buf.build/go/protovalidate"
+	"github.com/google/uuid"
 	// "github.com/google/uuid"
 
 	"google.golang.org/grpc/codes"
@@ -43,6 +44,33 @@ func (s *Server) Validator(req interface{}) error {
 	}
 
 	return errors.New("invalid request")
+}
+
+
+func (s *Server) DeleteNews(stream newsv1.NewsService_DeleteNewsServer) error {
+
+
+	for {
+		in, err := stream.Recv()
+		if errors.Is(err, io.EOF) {
+			return nil
+		}
+		if err != nil {
+			return err
+		}
+
+		newsUUID, err := uuid.Parse(in.Id)
+		if err != nil {
+			return status.Error(codes.InvalidArgument, err.Error())
+		}
+
+		s.store.DeleteNews(newsUUID)
+		fmt.Printf("delete news: %v", in)
+		if err = stream.Send(&newsv1.NewsIdResponse{Id: newsUUID.String()}); err != nil {
+			return err
+		}
+
+	}
 }
 
 func (s *Server) UpdateNews(stream newsv1.NewsService_UpdateNewsServer) error {

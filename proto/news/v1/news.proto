@@ -46,4 +46,12 @@ message NewsServiceCreateResponse {
   google.protobuf.Timestamp deleted_at = 10;
 }
 
+message NewsID {
+  string id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+message NewsIdResponse {
+  string id = 1;
+}
+
 

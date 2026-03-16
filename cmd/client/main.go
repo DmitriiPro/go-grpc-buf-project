@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -101,12 +102,11 @@ func main() {
 
 	//* Client-side streaming RPC
 	var streamUpdateNews grpc.ClientStreamingClient[newsv1.NewsServiceCreateRequest, emptypb.Empty]
-	
+
 	streamUpdateNews, err = client.UpdateNews(ctx)
 	if err != nil {
 		log.Fatalf("failed to update news: %v", err)
 	}
-
 
 	for i := 0; i < 5; i++ {
 		if err := streamUpdateNews.Send(
@@ -128,8 +128,7 @@ func main() {
 		log.Fatalf("failed to close send: %v", err)
 	}
 
-
-		streamGetAll, err = client.GetAll(ctx, &emptypb.Empty{})
+	streamGetAll, err = client.GetAll(ctx, &emptypb.Empty{})
 	if err != nil {
 		log.Fatalf("failed to streaming get all news: %v", err)
 	}
@@ -151,4 +150,38 @@ func main() {
 	}
 
 	log.Printf("allNews: %v", allNews)
+
+	//* bidirectional streaming Client
+	streamDeleteNews, err := client.DeleteNews(ctx)
+	if err != nil {
+		log.Fatalf("failed to delete news: %v", err)
+	}
+
+	waitc := make(chan struct{})
+
+	go func() {
+		for {
+			in, err := streamDeleteNews.Recv()
+			if errors.Is(err, io.EOF) {
+				close(waitc)
+				return
+			}
+
+			if err != nil {
+				log.Fatalf("Failed to receive a news: %v", err)
+			}
+
+			log.Printf("DeleteNews: %v", in)
+		}
+	}()
+
+	for _, news := range allNews {
+		if err := streamDeleteNews.Send(&newsv1.NewsID{Id: news.GetId()}); err != nil {
+			log.Fatalf("failed to send news: %v", err)
+		}
+	}
+
+	streamDeleteNews.CloseSend()
+	<-waitc
+
 }

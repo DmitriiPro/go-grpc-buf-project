@@ -391,6 +391,94 @@ func (x *NewsServiceCreateResponse) GetDeletedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type NewsID struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewsID) Reset() {
+	*x = NewsID{}
+	mi := &file_news_v1_news_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewsID) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewsID) ProtoMessage() {}
+
+func (x *NewsID) ProtoReflect() protoreflect.Message {
+	mi := &file_news_v1_news_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewsID.ProtoReflect.Descriptor instead.
+func (*NewsID) Descriptor() ([]byte, []int) {
+	return file_news_v1_news_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *NewsID) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type NewsIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewsIdResponse) Reset() {
+	*x = NewsIdResponse{}
+	mi := &file_news_v1_news_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewsIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewsIdResponse) ProtoMessage() {}
+
+func (x *NewsIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_news_v1_news_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewsIdResponse.ProtoReflect.Descriptor instead.
+func (*NewsIdResponse) Descriptor() ([]byte, []int) {
+	return file_news_v1_news_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *NewsIdResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 var File_news_v1_news_proto protoreflect.FileDescriptor
 
 const file_news_v1_news_proto_rawDesc = "" +
@@ -435,7 +523,11 @@ const file_news_v1_news_proto_rawDesc = "" +
 	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
 	"\n" +
 	"deleted_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAtBw\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\"\n" +
+	"\x06NewsID\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\" \n" +
+	"\x0eNewsIdResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02idBw\n" +
 	"\vcom.news.v1B\tNewsProtoP\x01Z news/buf/grpc/api/news/v1;newsv1\xa2\x02\x03NXX\xaa\x02\aNews.V1\xca\x02\aNews\\V1\xe2\x02\x13News\\V1\\GPBMetadata\xea\x02\bNews::V1b\x06proto3"
 
 var (
@@ -450,21 +542,23 @@ func file_news_v1_news_proto_rawDescGZIP() []byte {
 	return file_news_v1_news_proto_rawDescData
 }
 
-var file_news_v1_news_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_news_v1_news_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_news_v1_news_proto_goTypes = []any{
 	(*NewsServiceGetRequest)(nil),     // 0: news.v1.NewsServiceGetRequest
 	(*NewsServiceGetResponse)(nil),    // 1: news.v1.NewsServiceGetResponse
 	(*NewsServiceCreateRequest)(nil),  // 2: news.v1.NewsServiceCreateRequest
 	(*NewsServiceCreateResponse)(nil), // 3: news.v1.NewsServiceCreateResponse
-	(*timestamppb.Timestamp)(nil),     // 4: google.protobuf.Timestamp
+	(*NewsID)(nil),                    // 4: news.v1.NewsID
+	(*NewsIdResponse)(nil),            // 5: news.v1.NewsIdResponse
+	(*timestamppb.Timestamp)(nil),     // 6: google.protobuf.Timestamp
 }
 var file_news_v1_news_proto_depIdxs = []int32{
-	4, // 0: news.v1.NewsServiceGetResponse.created_at:type_name -> google.protobuf.Timestamp
-	4, // 1: news.v1.NewsServiceGetResponse.updated_at:type_name -> google.protobuf.Timestamp
-	4, // 2: news.v1.NewsServiceGetResponse.deleted_at:type_name -> google.protobuf.Timestamp
-	4, // 3: news.v1.NewsServiceCreateResponse.created_at:type_name -> google.protobuf.Timestamp
-	4, // 4: news.v1.NewsServiceCreateResponse.updated_at:type_name -> google.protobuf.Timestamp
-	4, // 5: news.v1.NewsServiceCreateResponse.deleted_at:type_name -> google.protobuf.Timestamp
+	6, // 0: news.v1.NewsServiceGetResponse.created_at:type_name -> google.protobuf.Timestamp
+	6, // 1: news.v1.NewsServiceGetResponse.updated_at:type_name -> google.protobuf.Timestamp
+	6, // 2: news.v1.NewsServiceGetResponse.deleted_at:type_name -> google.protobuf.Timestamp
+	6, // 3: news.v1.NewsServiceCreateResponse.created_at:type_name -> google.protobuf.Timestamp
+	6, // 4: news.v1.NewsServiceCreateResponse.updated_at:type_name -> google.protobuf.Timestamp
+	6, // 5: news.v1.NewsServiceCreateResponse.deleted_at:type_name -> google.protobuf.Timestamp
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
@@ -483,7 +577,7 @@ func file_news_v1_news_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_news_v1_news_proto_rawDesc), len(file_news_v1_news_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

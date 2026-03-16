@@ -654,3 +654,205 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = NewsServiceCreateResponseValidationError{}
+
+// Validate checks the field values on NewsID with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *NewsID) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on NewsID with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in NewsIDMultiError, or nil if none found.
+func (m *NewsID) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *NewsID) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return NewsIDMultiError(errors)
+	}
+
+	return nil
+}
+
+// NewsIDMultiError is an error wrapping multiple validation errors returned by
+// NewsID.ValidateAll() if the designated constraints aren't met.
+type NewsIDMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m NewsIDMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m NewsIDMultiError) AllErrors() []error { return m }
+
+// NewsIDValidationError is the validation error returned by NewsID.Validate if
+// the designated constraints aren't met.
+type NewsIDValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e NewsIDValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e NewsIDValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e NewsIDValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e NewsIDValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e NewsIDValidationError) ErrorName() string { return "NewsIDValidationError" }
+
+// Error satisfies the builtin error interface
+func (e NewsIDValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sNewsID.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = NewsIDValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = NewsIDValidationError{}
+
+// Validate checks the field values on NewsIdResponse with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *NewsIdResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on NewsIdResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in NewsIdResponseMultiError,
+// or nil if none found.
+func (m *NewsIdResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *NewsIdResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return NewsIdResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// NewsIdResponseMultiError is an error wrapping multiple validation errors
+// returned by NewsIdResponse.ValidateAll() if the designated constraints
+// aren't met.
+type NewsIdResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m NewsIdResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m NewsIdResponseMultiError) AllErrors() []error { return m }
+
+// NewsIdResponseValidationError is the validation error returned by
+// NewsIdResponse.Validate if the designated constraints aren't met.
+type NewsIdResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e NewsIdResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e NewsIdResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e NewsIdResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e NewsIdResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e NewsIdResponseValidationError) ErrorName() string { return "NewsIdResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e NewsIdResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sNewsIdResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = NewsIdResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = NewsIdResponseValidationError{}

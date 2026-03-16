@@ -25,33 +25,39 @@ var File_news_v1_service_proto protoreflect.FileDescriptor
 
 const file_news_v1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x15news/v1/service.proto\x12\anews.v1\x1a\x12news/v1/news.proto\x1a\x1bgoogle/protobuf/empty.proto2\xb6\x02\n" +
+	"\x15news/v1/service.proto\x12\anews.v1\x1a\x12news/v1/news.proto\x1a\x1bgoogle/protobuf/empty.proto2\xf2\x02\n" +
 	"\vNewsService\x12O\n" +
 	"\x06Create\x12!.news.v1.NewsServiceCreateRequest\x1a\".news.v1.NewsServiceCreateResponse\x12F\n" +
 	"\x03Get\x12\x1e.news.v1.NewsServiceGetRequest\x1a\x1f.news.v1.NewsServiceGetResponse\x12C\n" +
 	"\x06GetAll\x12\x16.google.protobuf.Empty\x1a\x1f.news.v1.NewsServiceGetResponse0\x01\x12I\n" +
 	"\n" +
-	"UpdateNews\x12!.news.v1.NewsServiceCreateRequest\x1a\x16.google.protobuf.Empty(\x01Bz\n" +
+	"UpdateNews\x12!.news.v1.NewsServiceCreateRequest\x1a\x16.google.protobuf.Empty(\x01\x12:\n" +
+	"\n" +
+	"DeleteNews\x12\x0f.news.v1.NewsID\x1a\x17.news.v1.NewsIdResponse(\x010\x01Bz\n" +
 	"\vcom.news.v1B\fServiceProtoP\x01Z news/buf/grpc/api/news/v1;newsv1\xa2\x02\x03NXX\xaa\x02\aNews.V1\xca\x02\aNews\\V1\xe2\x02\x13News\\V1\\GPBMetadata\xea\x02\bNews::V1b\x06proto3"
 
 var file_news_v1_service_proto_goTypes = []any{
 	(*NewsServiceCreateRequest)(nil),  // 0: news.v1.NewsServiceCreateRequest
 	(*NewsServiceGetRequest)(nil),     // 1: news.v1.NewsServiceGetRequest
 	(*emptypb.Empty)(nil),             // 2: google.protobuf.Empty
-	(*NewsServiceCreateResponse)(nil), // 3: news.v1.NewsServiceCreateResponse
-	(*NewsServiceGetResponse)(nil),    // 4: news.v1.NewsServiceGetResponse
+	(*NewsID)(nil),                    // 3: news.v1.NewsID
+	(*NewsServiceCreateResponse)(nil), // 4: news.v1.NewsServiceCreateResponse
+	(*NewsServiceGetResponse)(nil),    // 5: news.v1.NewsServiceGetResponse
+	(*NewsIdResponse)(nil),            // 6: news.v1.NewsIdResponse
 }
 var file_news_v1_service_proto_depIdxs = []int32{
 	0, // 0: news.v1.NewsService.Create:input_type -> news.v1.NewsServiceCreateRequest
 	1, // 1: news.v1.NewsService.Get:input_type -> news.v1.NewsServiceGetRequest
 	2, // 2: news.v1.NewsService.GetAll:input_type -> google.protobuf.Empty
 	0, // 3: news.v1.NewsService.UpdateNews:input_type -> news.v1.NewsServiceCreateRequest
-	3, // 4: news.v1.NewsService.Create:output_type -> news.v1.NewsServiceCreateResponse
-	4, // 5: news.v1.NewsService.Get:output_type -> news.v1.NewsServiceGetResponse
-	4, // 6: news.v1.NewsService.GetAll:output_type -> news.v1.NewsServiceGetResponse
-	2, // 7: news.v1.NewsService.UpdateNews:output_type -> google.protobuf.Empty
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	3, // 4: news.v1.NewsService.DeleteNews:input_type -> news.v1.NewsID
+	4, // 5: news.v1.NewsService.Create:output_type -> news.v1.NewsServiceCreateResponse
+	5, // 6: news.v1.NewsService.Get:output_type -> news.v1.NewsServiceGetResponse
+	5, // 7: news.v1.NewsService.GetAll:output_type -> news.v1.NewsServiceGetResponse
+	2, // 8: news.v1.NewsService.UpdateNews:output_type -> google.protobuf.Empty
+	6, // 9: news.v1.NewsService.DeleteNews:output_type -> news.v1.NewsIdResponse
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
