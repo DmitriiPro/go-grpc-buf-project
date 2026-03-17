@@ -21,6 +21,29 @@ const (
 	PORT_GRPC_CLIENT = 50051
 )
 
+const serviceConfig = `
+{
+  "loadBalancingConfig": [ { "round_robin": {} } ],
+  "methodConfig": [
+    {
+      "name": [{
+				"method": "Get",
+				"service": "news.v1.NewsService"
+			}],
+			"retryPolicy": {
+				"maxAttempts": 5,
+				"initialBackoff": "0.1s",
+				"maxBackoff": "0.5s",
+				"backoffMultiplier": 1.5,
+				"retryableStatusCodes": [ "UNAVAILABLE" , "INTERNAL" ]
+			},
+			"timeout": "2s",
+			"waitForReady": true
+    }
+  ]
+}
+`
+
 func unaryInterceptor(ctx context.Context, method string, req, reply any, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 
 	start := time.Now()
@@ -42,6 +65,7 @@ func startGRPCClient(port string) *grpc.ClientConn {
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithUnaryInterceptor(unaryInterceptor),
 		grpc.WithStreamInterceptor(streamInterceptor),
+		grpc.WithDefaultServiceConfig(serviceConfig),
 	)
 
 	conn, err := grpc.NewClient(port, opts...)
